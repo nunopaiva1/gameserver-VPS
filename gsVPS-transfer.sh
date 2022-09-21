@@ -9,9 +9,12 @@ command -v git >/dev/null 2>&1 ||
 
 #The next 3 lines replace the ssh config file. A new one is added that enables the SSH on a VPS.
 #Finally, we enable this service and restart it to ensure it will be turned on by default.
-rm /etc/ssh/sshd_config ;
-mv sshd_config /etc/ssh/sshd_config && systemctl systemctl enable ssh ;
-systemctl restart ssh
+
+rm /etc/ssh/sshd_config
+cp sshd_config /etc/ssh
+
+systemctl enable ssh && systemctl restart ssh &> /dev/null ;
+
 
 echo ""
 echo =-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=
