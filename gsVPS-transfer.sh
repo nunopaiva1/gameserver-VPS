@@ -49,7 +49,13 @@ else
   cd / && mkdir pro && cd /pro
 fi
 
-mkdir $SERVICENAME && cd $SERVICENAME ;
+if [ -d "$SERVICENAME" ]; then
+   ### Take action if #SERVICENAME exists ###
+   cd $SERVICENAME
+else
+   ### Creates new directory with the name of #SERVICENAME
+   mkdir $SERVICENAME && cd $SERVICENAME ; 
+fi
 
 wget -r --user="${USER}" --password="${PASSWORD}" ftp://$HOST &> /dev/null && mv $HOST/* /pro/$SERVICENAME/ ;
 
